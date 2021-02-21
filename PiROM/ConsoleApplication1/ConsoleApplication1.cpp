@@ -33,6 +33,37 @@ extern "C" {
         return 0;
     }
 
+    /**
+ * Read one 32-bit double word (little endian) from EEPROM address __p.
+ */
+    uint32_t eeprom_read_dword(const uint32_t* __p)
+    {
+        size_t addr = (size_t)__p;
+
+        if (addr < EEPROM_SIZE - (sizeof(uint32_t) - sizeof(uint8_t)))
+        {
+            return (uint32_t) * (_eeprom + addr);
+        }
+
+        return 0;
+    }
+
+    /**
+     * Read one float value (little endian) from EEPROM address __p.
+     */
+    float eeprom_read_float(const float* __p)
+    {
+        size_t addr = (size_t)__p;
+
+        if (addr < EEPROM_SIZE - (sizeof(float) - sizeof(uint8_t)))
+        {
+            return (float)*(_eeprom + addr);
+        }
+
+        return 0;
+    }
+
+
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 
