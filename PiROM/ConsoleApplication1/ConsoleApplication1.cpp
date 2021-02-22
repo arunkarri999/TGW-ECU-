@@ -63,6 +63,19 @@ extern "C" {
         return 0;
     }
 
+    /**
+ * Read a block of __n bytes from EEPROM address __src to SRAM __dst.
+ */
+    void eeprom_read_block(void* __dst, const void* __src, size_t __n)
+    {
+        size_t addr = (size_t)__src;
+
+        if (addr < EEPROM_SIZE - (__n - sizeof(uint8_t)))
+        {
+            memcpy(__dst, (_eeprom + addr), __n);
+        }
+    }
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
