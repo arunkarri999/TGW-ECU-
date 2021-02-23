@@ -75,6 +75,19 @@ extern "C" {
             memcpy(__dst, (_eeprom + addr), __n);
         }
     }
+    /**
+ * Write a byte __value to EEPROM address __p.
+ */
+    void eeprom_write_byte(uint8_t* __p, uint8_t __value)
+    {
+        size_t addr = (size_t)__p;
+
+        if (addr < EEPROM_SIZE)
+        {
+            memcpy((_eeprom + addr), &__value, sizeof(uint8_t));
+        }
+    }
+
 
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
