@@ -88,6 +88,32 @@ extern "C" {
         }
     }
 
+    /**
+ * Write a word __value to EEPROM address __p.
+ */
+    void eeprom_write_word(uint16_t* __p, uint16_t __value)
+    {
+        size_t addr = (size_t)__p;
+
+        if (addr < EEPROM_SIZE - (sizeof(uint16_t) - sizeof(uint8_t)))
+        {
+            memcpy((_eeprom + addr), &__value, sizeof(uint16_t));
+        }
+    }
+
+    /**
+     * Write a 32-bit double word __value to EEPROM address __p.
+     */
+    void eeprom_write_dword(uint32_t* __p, uint32_t __value)
+    {
+        size_t addr = (size_t)__p;
+
+        if (addr < EEPROM_SIZE - (sizeof(uint32_t) - sizeof(uint8_t)))
+        {
+            memcpy((_eeprom + addr), &__value, sizeof(uint32_t));
+        }
+    }
+
 
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
