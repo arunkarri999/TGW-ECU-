@@ -109,9 +109,7 @@ extern "C" {
         size_t addr = (size_t)__p;
 
         if (addr < EEPROM_SIZE - (sizeof(uint32_t) - sizeof(uint8_t)))
-
         {
-            memcpy((_eeprom + addr), &__value, sizeof(uint32_t));
             memcpy((_eeprom + addr), &__value, sizeof(uint32_t));
         }
     }
