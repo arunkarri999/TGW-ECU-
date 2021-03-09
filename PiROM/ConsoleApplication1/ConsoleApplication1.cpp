@@ -109,12 +109,42 @@ extern "C" {
         size_t addr = (size_t)__p;
 
         if (addr < EEPROM_SIZE - (sizeof(uint32_t) - sizeof(uint8_t)))
-
         {
-            memcpy((_eeprom + addr), &__value, sizeof(uint32_t));
             memcpy((_eeprom + addr), &__value, sizeof(uint32_t));
         }
     }
+
+    /**
+ * Write a float __value to EEPROM address __p.
+ */
+    void eeprom_write_float(float* __p, float __value)
+    {
+        size_t addr = (size_t)__p;
+
+        if (addr < EEPROM_SIZE - (sizeof(float) - sizeof(uint8_t)))
+        {
+            memcpy((_eeprom + addr), &__value, sizeof(float));
+        }
+    }
+
+    /**
+     * Write a block of __n bytes to EEPROM address __dst from __src.
+     * The argument order is mismatch with common functions like strcpy().
+     */
+    void eeprom_write_block(const void* __src, void* __dst, size_t __n)
+    {
+        size_t addr = (size_t)__dst;
+
+        if (addr < EEPROM_SIZE - (__n - sizeof(uint8_t)))
+        {
+            memcpy((_eeprom + addr), __src, __n);
+        }
+    }
+
+
+#ifdef __cplusplus
+}
+#endif
 
 
 
